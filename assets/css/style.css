@@ -12,4 +12,20 @@ body {
 div.jumbotron {
     background-color: black;
     color: white;
+    padding: 10px;
+}
+
+.headerSpace {
+    padding-top: 1rem;
+}
+
+#current-dish {
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: black;
+    color: white;
+}
+
+#font {
+    font-family: 'Montserrat', sans-serif;
 }
