@@ -1,0 +1,15 @@
+body {
+    /* Full height */
+    height: 100%;
+    /* Full width */
+    width: 100%;
+    /* Background image */
+    background: url("../images/background.jpg") no-repeat center center fixed;
+    /* Center and scale the image nicely */
+    background-size: cover;
+}
+
+div.jumbotron {
+    background-color: black;
+    color: white;
+}
