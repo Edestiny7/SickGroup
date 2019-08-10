@@ -1,10 +1,12 @@
-let key = "5dec84ac5a31780ac10078ea116d758f";
+let recipieKey = "5dec84ac5a31780ac10078ea116d758f";
+let locationKey;
+let IP;
 
 //AJAX call to recipie API
 $(document).ready(function () {
 
     // $.ajax({
-    //     url: `https://www.food2fork.com/api/search?key=${key}&q=chicken%20breast&page=2`,
+    //     url: `https://www.food2fork.com/api/search?key=${recipieKey}&q=chicken%20breast&page=2`,
     //     method: "GET",
     // }).then(function (response) {
 
