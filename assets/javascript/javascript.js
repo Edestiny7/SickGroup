@@ -342,9 +342,9 @@ $(document).ready(function () {
     $("#current-dish").text(response1.recipes[3].title);
 
     $("#search-btn").on("click", function () {
-        let seachTerm = $("#search-field").toggle()
+        // let seachTerm = $("#search-field").toggle()
 
-        "https://www.food2fork.com/api/search?key=${recipeKey}&"
+        // "https://www.food2fork.com/api/search?key=${recipeKey}&"
     });
     $("#search-btn").on("click")
 
