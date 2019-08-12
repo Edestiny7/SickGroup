@@ -1,22 +1,45 @@
-let recipieKey = "5dec84ac5a31780ac10078ea116d758f";
-let locationKey;
-let IP;
-
-//AJAX call to recipie API
+//AJAX call to recipe API
 $(document).ready(function () {
+    // Call recipe API
+
+    let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
+    let locationKey;
+    let IP;
+    let recipe;
+    let location;
 
     // $.ajax({
-    //     url: `https://www.food2fork.com/api/search?key=${recipieKey}&q=chicken%20breast&page=2`,
+    //     url: `https://www.food2fork.com/api/search?key=${recipeKey}&q=chicken%20breast&page=2`,
     //     method: "GET",
     // }).then(function (response) {
 
     //     console.log(JSON.parse(response));
     //     console.log(response);
 
-    //     $("#current-dish").text(response);
-
+    //     recipe = response;
     // });
 
+    // Call Location API
+
+    function recipe
+    // var ip = "132.177.197.105";
+    // var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
+    // $(function () {
+    //     $.ajax({
+    //         url: "https://geo.ipify.org/api/v1",
+    //         dataType: "jsonp",
+    //         data: {
+    //             apiKey: api_key,
+    //             ipAddress: ip
+    //         },
+    //         success: function (data) {
+    //             $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
+    //             location = data;
+    //         }
+    //     });
+    // });
+
+    //Sample response
     let response1 = {
         "count": 30,
         "recipes": [{
@@ -311,8 +334,26 @@ $(document).ready(function () {
 
     console.log(response1);
     console.log(ingredients1);
+
+
+
+    //-------------------------------------Frontend Stuff--------------------------------------
+
     $("#current-dish").text(response1.recipes[3].title);
 
-});
+    $("#search-btn").on("click", function () {
+        // let seachTerm = $("#search-field").toggle()
 
-//Clickevent for Button
+        // "https://www.food2fork.com/api/search?key=${recipeKey}&"
+    });
+    $("#search-btn").on("click")
+
+
+
+    //-----------------------------------------------------------------------------------------
+
+    console.log(recipe);
+    console.log(location);
+
+});
+//Clickevent for Button 
