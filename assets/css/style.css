@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
 body {
     /* Full height */
     height: 100%;
@@ -28,4 +30,9 @@ div.jumbotron {
 
 #font {
     font-family: 'Montserrat', sans-serif;
+}
+
+#chalkboard {
+    font-family: 'Fredericka the Great', cursive;
+    color: white;
 }
