@@ -4,7 +4,9 @@ $(document).ready(function () {
 
     let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
     let locationKey;
-    let IP;
+    // let ip = $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
+    //     console.log(JSON.stringify(data, null, 2));
+    // });
     let recipe;
     let location;
 
@@ -19,25 +21,24 @@ $(document).ready(function () {
     //     recipe = response;
     // });
 
-    // Call Location API
 
-    // function recipe
-    // var ip = "132.177.197.105";
-    // var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    // $(function () {
-    //     $.ajax({
-    //         url: "https://geo.ipify.org/api/v1",
-    //         dataType: "jsonp",
-    //         data: {
-    //             apiKey: api_key,
-    //             ipAddress: ip
-    //         },
-    //         success: function (data) {
-    //             $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
-    //             location = data;
-    //         }
-    //     });
-    // });
+    // Call Location API
+    var ip = "";
+    var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
+    $(function () {
+        $.ajax({
+            url: "https://geo.ipify.org/api/v1",
+            dataType: "json",
+            data: {
+                apiKey: api_key,
+                ipAddress: ip
+            },
+            success: function (data) {
+                $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
+                location = data;
+            }
+        });
+    });
 
     //Sample response
     let response1 = {
@@ -353,7 +354,9 @@ $(document).ready(function () {
     //-----------------------------------------------------------------------------------------
 
     console.log(recipe);
-    console.log(location);
+    setTimeout(function () {
+        console.log(location.country);
+    }, 3000);
 
 });
 //Clickevent for Button 
