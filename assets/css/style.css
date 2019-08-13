@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
 body {
     /* Full height */
     height: 100%;
@@ -36,3 +37,8 @@ div.jumbotron {
     font-family: 'Fredericka the Great', cursive;
     color: white;
 }
+
+/* .about {
+    background-size: cover;
+    height: 100vw;
+} */
