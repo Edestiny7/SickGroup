@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     // Call Location API
 
-    function recipe
+    // function recipe
     // var ip = "132.177.197.105";
     // var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
     // $(function () {
@@ -342,7 +342,7 @@ $(document).ready(function () {
     $("#current-dish").text(response1.recipes[3].title);
 
     $("#search-btn").on("click", function () {
-        // let seachTerm = $("#search-field").toggle()
+        let seachTerm = $(".search-form").toggle()
 
         // "https://www.food2fork.com/api/search?key=${recipeKey}&"
     });
