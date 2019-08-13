@@ -340,6 +340,8 @@ $(document).ready(function () {
 
     //-------------------------------------Frontend Stuff--------------------------------------
 
+    $(".search-form").hide();
+
     $("#current-dish").text(response1.recipes[3].title);
 
     $("#search-btn").on("click", function () {
