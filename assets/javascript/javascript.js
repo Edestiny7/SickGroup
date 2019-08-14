@@ -1,5 +1,5 @@
 //AJAX call to recipe API
-$(document).ready(function () {
+$(document).ready(function() {
     // Call recipe API
 
     let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
@@ -343,7 +343,7 @@ $(document).ready(function () {
 
     $("#current-dish").text(response1.recipes[3].title);
 
-    $("#search-btn").on("click", function () {
+    $("#search-btn").on("click", function() {
         let seachTerm = $(".search-form").toggle()
 
         // "https://www.food2fork.com/api/search?key=${recipeKey}&"
@@ -357,5 +357,51 @@ $(document).ready(function () {
     console.log(recipe);
     console.log(location);
 
+    //-----------------------------------------------------------------------
+
+    //Favoriting functionality
+
+    // Load the favorites from localstorage.
+    let list = JSON.parse(localStorage.getItem("favorites"));
+
+    // Checkin if in local Storage
+    if (!Array.isArray(list)) {
+        list = [];
+    }
+
+    // Add to local storage
+    $("#fav").on("click", function(event) {
+        event.preventDefault();
+
+        // Get the recipe details and store them in variables
+        let favorite_id = response1.recipes.recipe_id;
+        let favorite_title = response1.recipes.title;
+        let favorite_image = response1.recipes.image;
+
+        // Adding favorite to  local list variable and adding it to local storage
+        list.push(
+            favorite_id,
+            favorite_title,
+            favorite_image);
+
+        // Save the favorite into localstorage.
+        localStorage.setItem("favorites", JSON.stringify(list));
+    });
+
+    // render to favorite page is the goal
+    function renderFavorites(list) {
+
+        // render favorites to page
+        for (var i = 0; i < list.length; i++) {
+
+            let favorite = $("<p>");
+            favorite.text(list[i]);
+            $("#favoriteRecipe").append(favorite);
+        }
+    }
+
+    // Update the favorites on the favorite page is the goal
+    renderFavorites(list);
+
 });
-//Clickevent for Button 
+//Clickevent for Button
