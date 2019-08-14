@@ -34,7 +34,7 @@ $(document).ready(function () {
                 ipAddress: ip
             },
             success: function (data) {
-                $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
+                // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
                 location = data;
             }
         });
@@ -352,12 +352,10 @@ $(document).ready(function () {
     $("#search-btn").on("click")
 
 
+    //---------------------------------Data processing------------------------------------------
 
-    //-----------------------------------------------------------------------------------------
-
-    console.log(recipe);
     setTimeout(function () {
-        console.log(location.country);
+        console.log(location.location.country);
     }, 3000);
 
 });
