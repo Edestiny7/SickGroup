@@ -1,10 +1,12 @@
 //AJAX call to recipe API
-$(document).ready(function() {
+$(document).ready(function () {
     // Call recipe API
 
     let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
     let locationKey;
-    let IP;
+    // let ip = $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
+    //     console.log(JSON.stringify(data, null, 2));
+    // });
     let recipe;
     let location;
 
@@ -19,25 +21,24 @@ $(document).ready(function() {
     //     recipe = response;
     // });
 
-    // Call Location API
 
-    // function recipe
-    // var ip = "132.177.197.105";
-    // var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    // $(function () {
-    //     $.ajax({
-    //         url: "https://geo.ipify.org/api/v1",
-    //         dataType: "jsonp",
-    //         data: {
-    //             apiKey: api_key,
-    //             ipAddress: ip
-    //         },
-    //         success: function (data) {
-    //             $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
-    //             location = data;
-    //         }
-    //     });
-    // });
+    // Call Location API
+    var ip = "";
+    var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
+    $(function () {
+        $.ajax({
+            url: "https://geo.ipify.org/api/v1",
+            dataType: "json",
+            data: {
+                apiKey: api_key,
+                ipAddress: ip
+            },
+            success: function (data) {
+                // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
+                location = data;
+            }
+        });
+    });
 
     //Sample response
     let response1 = {
@@ -343,7 +344,7 @@ $(document).ready(function() {
 
     $("#current-dish").text(response1.recipes[3].title);
 
-    $("#search-btn").on("click", function() {
+    $("#search-btn").on("click", function () {
         let seachTerm = $(".search-form").toggle()
 
         // "https://www.food2fork.com/api/search?key=${recipeKey}&"
@@ -351,11 +352,11 @@ $(document).ready(function() {
     $("#search-btn").on("click")
 
 
+    //---------------------------------Data processing------------------------------------------
 
-    //-----------------------------------------------------------------------------------------
-
-    console.log(recipe);
-    console.log(location);
+    setTimeout(function () {
+        console.log(location.location.country);
+    }, 3000);
 
     //-----------------------------------------------------------------------
 
@@ -370,13 +371,13 @@ $(document).ready(function() {
     }
 
     // Add to local storage
-    $("#fav").on("click", function(event) {
+    $("#fav").on("click", function (event) {
         event.preventDefault();
 
         // Get the recipe details and store them in variables
-        let favorite_id = response1.recipes.recipe_id;
-        let favorite_title = response1.recipes.title;
-        let favorite_image = response1.recipes.image;
+        let favorite_id = response1.recipes[4].recipe_id;
+        let favorite_title = response1.recipes[4].title;
+        let favorite_image = response1.recipes[4].image;
 
         // Adding favorite to  local list variable and adding it to local storage
         list.push(
@@ -386,6 +387,7 @@ $(document).ready(function() {
 
         // Save the favorite into localstorage.
         localStorage.setItem("favorites", JSON.stringify(list));
+        list = [];
     });
 
     // render to favorite page is the goal
