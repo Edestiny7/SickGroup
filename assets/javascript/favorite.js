@@ -1,6 +1,7 @@
 $(function() {
 
-    //Favorite button link functionality
+    // Update the favorites on the favorite page is the goal
+    renderFavorites(list);
 
     // Load the favorites from localstorage.
     let list = JSON.parse(localStorage.getItem("favorites"));
