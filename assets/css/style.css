@@ -32,7 +32,17 @@ div.jumbotron {
     font-family: 'Special Elite', cursive;
 }
 
+.fa_custom {
+    color: darkred;
+}
+
 #chalkboard {
     font-family: 'Fredericka the Great', cursive;
     color: white;
 }
+
+
+/* .about {
+    background-size: cover;
+    height: 100vw;
+} */
