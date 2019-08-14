@@ -1,5 +1,5 @@
 //AJAX call to recipe API
-$(document).ready(function() {
+$(document).ready(function () {
     // Call recipe API
 
     let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
@@ -10,22 +10,26 @@ $(document).ready(function() {
     let recipe;
     let location;
 
-    // $.ajax({
-    //     url: `https://www.food2fork.com/api/search?key=${recipeKey}&q=chicken%20breast&page=2`,
-    //     method: "GET",
-    // }).then(function (response) {
+    function recipeCall() {
+        $.ajax({
+            url: `https://www.food2fork.com/api/search?key=${recipeKey}&q=chicken%20breast&page=2`,
+            method: "GET",
+        }).then(function (response) {
 
-    //     console.log(JSON.parse(response));
-    //     console.log(response);
+            console.log(JSON.parse(response));
+            console.log(response);
 
-    //     recipe = response;
-    // });
+            recipe = response;
+        });
+    }
+
 
 
     // Call Location API
+
     var ip = "";
     var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    $(function() {
+    $(function () {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
@@ -33,12 +37,13 @@ $(document).ready(function() {
                 apiKey: api_key,
                 ipAddress: ip
             },
-            success: function(data) {
+            success: function (data) {
                 // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
                 location = data;
             }
         });
     });
+
 
     //Sample response
     let response1 = {
@@ -338,13 +343,19 @@ $(document).ready(function() {
 
 
 
-    //-------------------------------------Frontend Stuff--------------------------------------
+
+
+    //-------------------------------------Front end functionality--------------------------------------
 
     $(".search-form").hide();
 
     $("#current-dish").text(response1.recipes[3].title);
 
-    $("#search-btn").on("click", function() {
+
+
+    //-------------------------------------Search function--------------------------------------
+
+    $("#search-btn").on("click", function () {
         let seachTerm = $(".search-form").toggle()
 
         // "https://www.food2fork.com/api/search?key=${recipeKey}&"
@@ -354,7 +365,7 @@ $(document).ready(function() {
 
     //---------------------------------Data processing------------------------------------------
 
-    setTimeout(function() {
+    setTimeout(function () {
         console.log(location.location.country);
     }, 3000);
 
@@ -369,7 +380,7 @@ $(document).ready(function() {
     }
 
     // Add to local storage
-    $("#fav").on("click", function(event) {
+    $("#fav").on("click", function (event) {
         event.preventDefault();
 
         // Get the recipe details and store them in variables
