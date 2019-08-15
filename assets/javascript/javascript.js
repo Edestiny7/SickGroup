@@ -9,21 +9,23 @@ $(document).ready(function () {
     // });
     let recipe;
     let location;
+    // let searchterm;
 
-    function recipeCall() {
+    function recipeCall(searchTerm) {
         $.ajax({
-            url: `https://www.food2fork.com/api/search?key=${recipeKey}&q=chicken%20breast&page=2`,
+            url: searchTerm,
             method: "GET",
         }).then(function (response) {
 
-            console.log(JSON.parse(response));
+            // console.log(response);
             console.log(response);
 
-            recipe = response;
+            response = JSON.parse(response);
+            $("#current-dish").text(response.recipes[5].title);
+            let titleImg = $("<img>").attr("src", response.recipes[5].image_url);
+            $('#current-dish').append(titleImg);
         });
     }
-
-
 
     // Call Location API
 
@@ -338,8 +340,8 @@ $(document).ready(function () {
     }
 
 
-    console.log(response1);
-    console.log(ingredients1);
+    // console.log(response1);
+    // console.log(ingredients1);
 
 
 
@@ -356,60 +358,66 @@ $(document).ready(function () {
     //-------------------------------------Search function--------------------------------------
 
     $("#search-btn").on("click", function () {
-        let seachTerm = $(".search-form").toggle()
-
-        // "https://www.food2fork.com/api/search?key=${recipeKey}&"
-    });
-    $("#search-btn").on("click")
-
-
-    //---------------------------------Data processing------------------------------------------
-
-    setTimeout(function () {
-        console.log(location.location.country);
-    }, 3000);
-
-    //----------------------------------Favoriting functionality---------------------------------
-
-    // Load the favorites from localstorage.
-    let list = JSON.parse(localStorage.getItem("favorites"));
-
-    // Checkin if in local Storage
-    if (!Array.isArray(list)) {
-        list = [];
-    }
-
-    // Add to local storage
-    $("#fav").on("click", function (event) {
-        event.preventDefault();
-
-        // Get the recipe details and store them in variables
-        let favorite_id = response1.recipes[4].recipe_id;
-        let favorite_title = response1.recipes[4].title;
-        let favorite_image = response1.recipes[4].image_url;
-
-        // Adding favorite to  local list variable and adding it to local storage
-        list.push(
-            favorite_id,
-            favorite_title,
-            favorite_image);
-
-        // Save the favorite into localstorage.
-        localStorage.setItem("favorites", JSON.stringify(list));
-        list = [];
+        $(".search-form").toggle() //showing search form
     });
 
-    // render to favorite page is the goal
-    function renderFavorites(list) {
-
-        // render favorites to page
-        for (var i = 0; i < list.length; i++) {
-
-            let favorite = $("<p>");
-            favorite.text(list[i]);
-            $("#favoriteRecipe").append(favorite);
-        }
-    }
-
+    $("#search-btn2").on("click", function () {
+        let searchTerm = $("#search-input").val();
+        let apiInput = `https://www.food2fork.com/api/search?key=${recipeKey}&q=${searchTerm}`;
+        recipeCall(apiInput);
+    });
 });
+
+
+
+
+//---------------------------------Data processing------------------------------------------
+
+setTimeout(function () {
+    // console.log(location.location.country);
+}, 3000);
+
+//----------------------------------Favoriting functionality---------------------------------
+
+// Load the favorites from localstorage.
+let list = JSON.parse(localStorage.getItem("favorites"));
+
+// Checkin if in local Storage
+if (!Array.isArray(list)) {
+    list = [];
+}
+
+// Add to local storage
+$("#fav").on("click", function (event) {
+    event.preventDefault();
+
+    // Get the recipe details and store them in variables
+    let favorite_id = response1.recipes[4].recipe_id;
+    let favorite_title = response1.recipes[4].title;
+    let favorite_image = response1.recipes[4].image_url;
+
+    // Adding favorite to  local list variable and adding it to local storage
+    list.push(
+        favorite_id,
+        favorite_title,
+        favorite_image);
+
+    // Save the favorite into localstorage.
+    localStorage.setItem("favorites", JSON.stringify(list));
+    list = [];
+});
+
+// render to favorite page is the goal
+function renderFavorites(list) {
+
+    // render favorites to page
+    for (var i = 0; i < list.length; i++) {
+
+        let favorite = $("<p>");
+        favorite.text(list[i]);
+        $("#favoriteRecipe").append(favorite);
+    }
+}
+
+
 //Clickevent for Button
