@@ -17,34 +17,56 @@ $(document).ready(function () {
             method: "GET",
         }).then(function (response) {
 
-            // console.log(response);
-            console.log(response);
+            console.log(response1);
+            $(".search-form").hide();
 
-            response = JSON.parse(response);
-            $("#current-dish").text(response.recipes[5].title);
-            let titleImg = $("<img>").attr("src", response.recipes[5].image_url);
-            $('#current-dish').append(titleImg);
+
+            // let random = Math.floor(Math.random() * 30);
+            // response = JSON.parse(response1);
+
+            for (i = 0; i < response1.recipes.length; i++) {
+                console.log(2);
+                let titleImg = $("<img>")
+                    .attr("src", response1.recipes[i].image_url)
+                    .css("max-width", "500px");
+                console.log("call");
+
+                let dishTitle = $("<h5>")
+                dishTitle
+                    .text(response1.recipes[i].title)
+                    .addClass("font")
+                    .css("text-align", "center");
+
+                let newListDiv = $("<div>")
+                    .addClass("jumbotron justify-content-center")
+                    .css("width", "fit-content")
+                    .css("margin", "10px auto")
+                    .append(dishTitle)
+                    .append(titleImg);
+
+                $("#current-dish").append(newListDiv);
+            }
         });
     }
 
     // Call Location API
 
-    var ip = "";
-    var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    $(function () {
-        $.ajax({
-            url: "https://geo.ipify.org/api/v1",
-            dataType: "json",
-            data: {
-                apiKey: api_key,
-                ipAddress: ip
-            },
-            success: function (data) {
-                // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
-                location = data;
-            }
-        });
-    });
+    // var ip = "";
+    // var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
+    // $(function () {
+    //     $.ajax({
+    //         url: "https://geo.ipify.org/api/v1",
+    //         dataType: "json",
+    //         data: {
+    //             apiKey: api_key,
+    //             ipAddress: ip
+    //         },
+    //         success: function (data) {
+    //             // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
+    //             location = data;
+    //         }
+    //     });
+    // });
 
 
     //Sample response
@@ -351,9 +373,6 @@ $(document).ready(function () {
 
     $(".search-form").hide();
 
-    $("#current-dish").text(response1.recipes[3].title);
-
-
 
     //-------------------------------------Search function--------------------------------------
 
@@ -373,51 +392,49 @@ $(document).ready(function () {
 
 //---------------------------------Data processing------------------------------------------
 
-setTimeout(function () {
-    // console.log(location.location.country);
-}, 3000);
+
 
 //----------------------------------Favoriting functionality---------------------------------
 
 // Load the favorites from localstorage.
-let list = JSON.parse(localStorage.getItem("favorites"));
+// let list = JSON.parse(localStorage.getItem("favorites"));
 
-// Checkin if in local Storage
-if (!Array.isArray(list)) {
-    list = [];
-}
+// // Checkin if in local Storage
+// if (!Array.isArray(list)) {
+//     list = [];
+// }
 
-// Add to local storage
-$("#fav").on("click", function (event) {
-    event.preventDefault();
+// // Add to local storage
+// $("#fav").on("click", function (event) {
+//     event.preventDefault();
 
-    // Get the recipe details and store them in variables
-    let favorite_id = response1.recipes[4].recipe_id;
-    let favorite_title = response1.recipes[4].title;
-    let favorite_image = response1.recipes[4].image_url;
+//     // Get the recipe details and store them in variables
+//     let favorite_id = response1.recipes[4].recipe_id;
+//     let favorite_title = response1.recipes[4].title;
+//     let favorite_image = response1.recipes[4].image_url;
 
-    // Adding favorite to  local list variable and adding it to local storage
-    list.push(
-        favorite_id,
-        favorite_title,
-        favorite_image);
+//     // Adding favorite to  local list variable and adding it to local storage
+//     list.push(
+//         favorite_id,
+//         favorite_title,
+//         favorite_image);
 
-    // Save the favorite into localstorage.
-    localStorage.setItem("favorites", JSON.stringify(list));
-    list = [];
-});
+//     // Save the favorite into localstorage.
+//     localStorage.setItem("favorites", JSON.stringify(list));
+//     list = [];
+// });
 
-// render to favorite page is the goal
-function renderFavorites(list) {
+// // render to favorite page is the goal
+// function renderFavorites(list) {
 
-    // render favorites to page
-    for (var i = 0; i < list.length; i++) {
+//     // render favorites to page
+//     for (var i = 0; i < list.length; i++) {
 
-        let favorite = $("<p>");
-        favorite.text(list[i]);
-        $("#favoriteRecipe").append(favorite);
-    }
-}
+//         let favorite = $("<p>");
+//         favorite.text(list[i]);
+//         $("#favoriteRecipe").append(favorite);
+//     }
+// }
 
 
 //Clickevent for Button
