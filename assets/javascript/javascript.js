@@ -1,5 +1,5 @@
 //AJAX call to recipe API
-$(document).ready(function () {
+$(document).ready(function() {
     // Call recipe API
 
     let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
@@ -14,7 +14,7 @@ $(document).ready(function () {
         $.ajax({
             url: `https://www.food2fork.com/api/search?key=${recipeKey}&q=chicken%20breast&page=2`,
             method: "GET",
-        }).then(function (response) {
+        }).then(function(response) {
 
             console.log(JSON.parse(response));
             console.log(response);
@@ -29,7 +29,7 @@ $(document).ready(function () {
 
     var ip = "";
     var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    $(function () {
+    $(function() {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
@@ -37,7 +37,7 @@ $(document).ready(function () {
                 apiKey: api_key,
                 ipAddress: ip
             },
-            success: function (data) {
+            success: function(data) {
                 // $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
                 location = data;
             }
@@ -355,7 +355,7 @@ $(document).ready(function () {
 
     //-------------------------------------Search function--------------------------------------
 
-    $("#search-btn").on("click", function () {
+    $("#search-btn").on("click", function() {
         let seachTerm = $(".search-form").toggle()
 
         // "https://www.food2fork.com/api/search?key=${recipeKey}&"
@@ -365,7 +365,7 @@ $(document).ready(function () {
 
     //---------------------------------Data processing------------------------------------------
 
-    setTimeout(function () {
+    setTimeout(function() {
         console.log(location.location.country);
     }, 3000);
 
@@ -374,42 +374,37 @@ $(document).ready(function () {
     // Load the favorites from localstorage.
     let list = JSON.parse(localStorage.getItem("favorites"));
 
-    // Checkin if in local Storage
-    if (!Array.isArray(list)) {
-        list = [];
-    }
 
     // Add to local storage
-    $("#fav").on("click", function (event) {
+    $("#fav").on("click", function(event) {
         event.preventDefault();
 
-        // Get the recipe details and store them in variables
-        let favorite_id = response1.recipes[4].recipe_id;
-        let favorite_title = response1.recipes[4].title;
-        let favorite_image = response1.recipes[4].image_url;
+        let favoriteList = JSON.parse(localStorage.getItem("favorites"));
 
-        // Adding favorite to  local list variable and adding it to local storage
-        list.push(
-            favorite_id,
-            favorite_title,
-            favorite_image);
+        // Checkin if in local Storage
+        if (!Array.isArray(favoriteList)) {
+            favoriteList = [];
+        }
+
+        // Get the recipe details and store them in an object
+        let favoriteObject = {
+            favoriteId: response1.recipes[4].recipe_id,
+            favoriteTitle: response1.recipes[4].title,
+            favoriteImage: response1.recipes[4].image_url,
+            favoritePublisher: response1.recipes[4].publisher,
+            favoriteF2fUrl: response1.recipes[4].f2f_url,
+            favoriteIngredients: response1.recipes[4].ingredients,
+            favoriteSourceUrl: response1.recipes[4].source_url,
+            favoriteSocialRank: response1.recipes[4].social_rank,
+            favoritePublisherUrl: response1.recipes[4].publisher_url
+        }
+
+        // Adding favorite to local list variable and adding it to local storage
+        favoriteList.push(favoriteObject);
 
         // Save the favorite into localstorage.
-        localStorage.setItem("favorites", JSON.stringify(list));
-        list = [];
+        localStorage.setItem("favorites", JSON.stringify(favoriteList));
     });
-
-    // render to favorite page is the goal
-    function renderFavorites(list) {
-
-        // render favorites to page
-        for (var i = 0; i < list.length; i++) {
-
-            let favorite = $("<p>");
-            favorite.text(list[i]);
-            $("#favoriteRecipe").append(favorite);
-        }
-    }
 
 });
 //Clickevent for Button
