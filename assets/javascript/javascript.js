@@ -2,7 +2,7 @@
 $(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
+    let recipeKey = "69d0e213894baf3dbaef4e09fa5215d8";
     let locationKey;
     let recipe;
     let location;
@@ -19,28 +19,27 @@ $(document).ready(function () {
             $("#current-dish").empty();
 
             // let random = Math.floor(Math.random() * 30);
-            response = JSON.parse(response);
-
-            for (i = 0; i < response.recipes.length; i++) {
-                console.log(2);
+            response = JSON.parse(response1);
+            for (i = 0; i < response1.recipes.length; i++) {
                 let favIcon = $("<i>")
                     .addClass("fav")
-                    .attr("value", JSON.stringify(response.recipes[i]))
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .addClass("fa fa-heart fa_custom");
 
                 let titleImg = $("<img>")
-                    .attr("src", response.recipes[i].image_url)
+                    .attr("src", response1.recipes[i].image_url)
                     .css("max-width", "500px")
                     .add(favIcon);
 
                 let dishTitle = $("<h5>")
-                    .text(response.recipes[i].title)
+                    .text(response1.recipes[i].title)
                     .addClass("font")
                     .css("text-align", "center");
 
                 let newListDiv = $("<div>")
-                    .addClass("jumbotron justify-content-center")
+                    .addClass("jumbotron justify-content-center click-hook")
                     .css("width", "fit-content")
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .css("margin", "10px auto")
                     .append(dishTitle)
                     .append(titleImg)
@@ -112,23 +111,39 @@ $(document).ready(function () {
 
 // Add to local storage
 
+
+$(document).on("click", ".click-hook", function (event) {
+    event.preventDefault();
+    localStorage.setItem("ingredients", JSON.stringify($(this).attr("value")));
+
+});
+
+
+let favoriteList = [];
+let favoriteObject;
+
+
+
 $(document).on("click", ".fav", function (event) {
     event.preventDefault();
 
-    let favoriteList = JSON.parse(localStorage.getItem("favorites"));
+
+
+
+    // console.log(favoriteList);
 
     // Checkin if in local Storage
-    if (!Array.isArray(favoriteList)) {
-        favoriteList = [];
-    }
-    console.log("test")
+    // if (!Array.isArray(favoriteList)) {
+    //     favoriteList = [];
+    // }
+
     // Get the recipe details and store them in an object
-    let favoriteObject = $(this).attr("value");
-    console.log(favoriteObject)
+
+    favoriteObject = $(this).attr("value");
+    console.log(JSON.stringify(favoriteObject))
 
     // Adding favorite to local list variable and adding it to local storage
     favoriteList.push(JSON.stringify(favoriteObject));
-
     // Save the favorite into localstorage.
     localStorage.setItem("favorites", favoriteList);
 });
