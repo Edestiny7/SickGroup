@@ -19,28 +19,27 @@ $(document).ready(function () {
             $("#current-dish").empty();
 
             // let random = Math.floor(Math.random() * 30);
-            response = JSON.parse(response);
-            for (i = 0; i < response.recipes.length; i++) {
-                console.log(2);
+            response = JSON.parse(response1);
+            for (i = 0; i < response1.recipes.length; i++) {
                 let favIcon = $("<i>")
                     .addClass("fav")
-                    .attr("value", JSON.stringify(response.recipes[i]))
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .addClass("fa fa-heart fa_custom");
 
                 let titleImg = $("<img>")
-                    .attr("src", response.recipes[i].image_url)
+                    .attr("src", response1.recipes[i].image_url)
                     .css("max-width", "500px")
                     .add(favIcon);
 
                 let dishTitle = $("<h5>")
-                    .text(response.recipes[i].title)
+                    .text(response1.recipes[i].title)
                     .addClass("font")
                     .css("text-align", "center");
 
                 let newListDiv = $("<div>")
                     .addClass("jumbotron justify-content-center click-hook")
                     .css("width", "fit-content")
-                    .attr("value", JSON.stringify(response.recipes[i]))
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .css("margin", "10px auto")
                     .append(dishTitle)
                     .append(titleImg)
