@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
 body {
     /* Full height */
     height: 100%;
@@ -20,7 +21,7 @@ div.jumbotron {
     padding-top: 1rem;
 }
 
-#current-dish {
+div.current-dish {
     margin-left: 0px;
     margin-right: 0px;
     background-color: black;
@@ -28,12 +29,9 @@ div.jumbotron {
     padding: 25px;
 }
 
-ul {
-    list-style-type: none;
-}
-
 .font {
     font-family: 'Special Elite', cursive;
+    color: white;
 }
 
 .fa_custom {
