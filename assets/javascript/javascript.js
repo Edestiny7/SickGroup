@@ -6,11 +6,6 @@ $(document).ready(function () {
     let locationKey;
     let recipe;
     let location;
-    // let ip = $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
-    //     console.log(JSON.stringify(data, null, 2));
-    // });
-    // let searchterm;
-
 
 
     function recipeCall(searchTerm) {
@@ -29,7 +24,6 @@ $(document).ready(function () {
             for (i = 0; i < response.recipes.length; i++) {
                 console.log(2);
                 let favIcon = $("<i>")
-                favIcon
                     .addClass("fav")
                     .attr("value", JSON.stringify(response.recipes[i]))
                     .addClass("fa fa-heart fa_custom");
@@ -40,7 +34,6 @@ $(document).ready(function () {
                     .add(favIcon);
 
                 let dishTitle = $("<h5>")
-                dishTitle
                     .text(response.recipes[i].title)
                     .addClass("font")
                     .css("text-align", "center");
@@ -51,7 +44,6 @@ $(document).ready(function () {
                     .css("margin", "10px auto")
                     .append(dishTitle)
                     .append(titleImg)
-
 
                 $("#current-dish").append(newListDiv);
             }
@@ -90,14 +82,15 @@ $(document).ready(function () {
         });
     });
 
-
-    // console.log(response1);
-    // console.log(ingredients1);
-
-
     //-------------------------------------Front end functionality--------------------------------------
 
     $(".search-form").hide();
+    $("#favorite-btn").on("click", () => {
+        window.location.href = "./favorite.html"
+    });
+    $("#about-btn").on("click", () => {
+        window.location.href = "./about.html"
+    });
 
     //-------------------------------------Search function--------------------------------------
 
@@ -131,13 +124,13 @@ $(document).on("click", ".fav", function (event) {
     console.log("test")
     // Get the recipe details and store them in an object
     let favoriteObject = $(this).attr("value");
-
+    console.log(favoriteObject)
 
     // Adding favorite to local list variable and adding it to local storage
-    favoriteList.push(favoriteObject);
+    favoriteList.push(JSON.stringify(favoriteObject));
 
     // Save the favorite into localstorage.
-    localStorage.setItem("favorites", JSON.stringify(favoriteList));
+    localStorage.setItem("favorites", favoriteList);
 });
 
 //Emily's original reused above
