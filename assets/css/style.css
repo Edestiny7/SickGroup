@@ -28,12 +28,21 @@ div.jumbotron {
     padding: 25px;
 }
 
+ul {
+    list-style-type: none;
+}
+
 .font {
     font-family: 'Special Elite', cursive;
 }
 
 .fa_custom {
     color: darkred;
+}
+
+#favoriteRecipe {
+    font-family: 'Special Elite', cursive;
+    color: white
 }
 
 #chalkboard {

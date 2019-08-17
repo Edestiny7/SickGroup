@@ -1,32 +1,32 @@
 $(function() {
 
-    // Update the favorites on the favorite page is the goal
-    renderFavorites(list);
-
     // Load the favorites from localstorage.
-    let list = JSON.parse(localStorage.getItem("favorites"));
+    let favoriteList = [];
 
-    // Checkin if in local Storage
-    if (!Array.isArray(list)) {
-        list = [];
-    }
-
-    // Add to local storage
-    $("#favorite-btn").on("click", function(event) {
-        event.preventDefault();
-
-        renderFavorites(list);
-    });
-
-    // render to favorite page is the goal
-    function renderFavorites(list) {
-
-        // render favorites to page
-        for (var i = 0; i < list.length; i++) {
-
-            let favorite = $("<p>");
-            favorite.text(list[i]);
+    // get favorite list from local storage
+    function getFavoriteList() {
+        if (typeof(Storage) !== "undefined") {
+            if (localStorage.getItem("favorites") != null) {
+                favoriteList = JSON.parse(localStorage.getItem("favorites"));
+            }
+        } else {
+            // Sorry! No Web Storage support..
         }
     }
+
+    // render favorites to page
+    function renderFavorites(favoriteList) {
+        for (var i = 0; i < favoriteList.length; i++) {
+            let favorite = $("<li>");
+            favorite.text(favoriteList[i].favoriteTitle);
+            $("#favoriteRecipe").append(favorite);
+        }
+    }
+
+    // call get favorites 
+    getFavoriteList();
+
+    // call render favorites function 
+    renderFavorites(favoriteList);
 
 });
