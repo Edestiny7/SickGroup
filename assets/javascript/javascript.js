@@ -2,7 +2,7 @@
 $(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "69d0e213894baf3dbaef4e09fa5215d8";
+    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
     let locationKey;
     let recipe;
     let location;
@@ -160,12 +160,14 @@ $(document).on("click", ".click-hook", function (event) {
 
         var recipeObject = localStorage.getItem("ingredients");
         recipeObject = JSON.parse(recipeObject);
+        recipeObject = JSON.parse(recipeObject);
         var recipeId = recipeObject.recipe_id;
         console.log(recipeObject);
         console.log(recipeId);
+        recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
 
         // var recipeid =;
-        var queryURL = "https://www.food2fork.com/api/get?key=YOUR_API_KEY&rId=" + recipeId;
+        var queryURL = "https://www.food2fork.com/api/get?rId=" + recipeId + "&key=" + recipeKey;
 
         $("#ingredients").empty();
         console.log("Test")
@@ -177,18 +179,20 @@ $(document).on("click", ".click-hook", function (event) {
             // After data comes back from the request
             .then(function (response) {
                 console.log(queryURL);
-                console.log(response);
+                console.log("response" + response);
                 // storing the data from the AJAX request in the results variable ONE OR THE OTHER OR BOTH OF THE TWO BELOW
-                var results = response.data;
-                console.log(results);
-                ingredients = recipe.ingredients;
-                console.log(ingredients);
+                // var results = response.data;
+                // console.log(results);
+                let ingredients = JSON.parse(response.ingredients);
+                ingredients = JSON.parse(ingredients);
+                console.log("ingredients" + ingredients);
+                console.log(typeof response);
                 var ingredientsList = $("<ul>");
                 //Loop through the ingredients returned from the call and append each one to ingredientsList
-                for (var i = 0; i < ingredients.length; i++) {
-                    var lI = $("<li>").text(ingredients[i]);
-                    ingredientsList.append(lI);
-                }
+                // for (var i = 0; i < ingredients.length; i++) {
+                //     var lI = $("<li>").text(ingredients[i]);
+                //     ingredientsList.append(lI);
+                // }
                 //Add ingredientsList unordered list to ingredients div
                 $("#ingredients").append(ingredientsList);
 
