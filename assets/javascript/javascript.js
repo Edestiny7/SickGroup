@@ -2,7 +2,7 @@
 $(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "5dec84ac5a31780ac10078ea116d758f";
+    let recipeKey = "69d0e213894baf3dbaef4e09fa5215d8";
     let locationKey;
     let recipe;
     let location;
@@ -30,16 +30,17 @@ $(document).ready(function () {
 
                 let titleImg = $("<img>")
                     .attr("src", response.recipes[i].image_url)
-                    .css("max-width", "500px")
-                    .add(favIcon);
+                    .css("max-width", "500px");
+
 
                 let dishTitle = $("<h5>")
                     .text(response.recipes[i].title)
                     .addClass("font")
-                    .css("text-align", "center");
+                    .css("text-align", "center")
+                    .add(favIcon);
 
                 let newListDiv = $("<div>")
-                    .addClass("jumbotron justify-content-center")
+                    .addClass("jumbotron justify-content-center dishOnIndex")
                     .css("width", "fit-content")
                     .css("margin", "10px auto")
                     .append(dishTitle)
@@ -133,6 +134,50 @@ $(document).on("click", ".fav", function (event) {
     localStorage.setItem("favorites", favoriteList);
 });
 
+//--------------------------------------On Click event for List on Index---------------------------------------------------------
+$(document).on("click", ".dishOnIndex", function (event) {
+    event.preventDefault();
+    let ingredients = [];
+    getIngredients;
+
+
+});
+
+function getIngredients(recipe) {
+
+    var recipeObject = localStorage.getItem("ingredients");
+    recipeObject = JSON.parse(recipeObject);
+
+    // var recipeid =;
+    var queryURL = `https://www.food2fork.com/api/get?key=YOUR_API_KEY&rId=${recipeObject.recipe_id}`;
+
+    $("#ingredients").empty();
+
+    $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+        // After data comes back from the request
+        .then(function (response) {
+            console.log(queryURL);
+            console.log(response);
+            // storing the data from the AJAX request in the results variable ONE OR THE OTHER OR BOTH OF THE TWO BELOW
+            var results = response.data;
+            console.log(results);
+            ingredients = recipe.ingredients;
+            console.log(ingredients);
+            var ingredientsList = $("<ul>");
+            //Loop through the ingredients returned from the call and append each one to ingredientsList
+            for (var i = 0; i < ingredients.length; i++) {
+                var lI = $("<li>").text(ingredients[i]);
+                ingredientsList.append(lI);
+            }
+            //Add ingredientsList unordered list to ingredients div
+            $("#ingredients").append(ingredientsList);
+
+        })
+
+}
 //Emily's original reused above
 
 // $(".fav").on("click", function (event) {
