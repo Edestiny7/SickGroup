@@ -19,8 +19,9 @@ $(document).ready(function () {
             $("#current-dish").empty();
 
             // let random = Math.floor(Math.random() * 30);
-            response = JSON.parse(response1);
+            // response1 = JSON.parse(response1);
             for (i = 0; i < response1.recipes.length; i++) {
+                console.log(2);
                 let favIcon = $("<i>")
                     .addClass("fav")
                     .attr("value", JSON.stringify(response1.recipes[i]))
