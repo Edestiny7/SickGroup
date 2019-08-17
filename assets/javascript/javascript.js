@@ -19,29 +19,29 @@ $(document).ready(function () {
             $("#current-dish").empty();
 
             // let random = Math.floor(Math.random() * 30);
-            response = JSON.parse(response);
-
-            for (i = 0; i < response.recipes.length; i++) {
+            // response1 = JSON.parse(response1);
+            for (i = 0; i < response1.recipes.length; i++) {
                 console.log(2);
                 let favIcon = $("<i>")
                     .addClass("fav")
-                    .attr("value", JSON.stringify(response.recipes[i]))
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .addClass("fa fa-heart fa_custom");
 
                 let titleImg = $("<img>")
-                    .attr("src", response.recipes[i].image_url)
-                    .css("max-width", "500px");
-
+                    .attr("src", response1.recipes[i].image_url)
+                    .css("max-width", "500px")
+                    .add(favIcon);
 
                 let dishTitle = $("<h5>")
-                    .text(response.recipes[i].title)
+                    .text(response1.recipes[i].title)
                     .addClass("font")
                     .css("text-align", "center")
                     .add(favIcon);
 
                 let newListDiv = $("<div>")
-                    .addClass("jumbotron justify-content-center dishOnIndex")
+                    .addClass("jumbotron justify-content-center click-hook")
                     .css("width", "fit-content")
+                    .attr("value", JSON.stringify(response1.recipes[i]))
                     .css("margin", "10px auto")
                     .append(dishTitle)
                     .append(titleImg)
@@ -113,71 +113,93 @@ $(document).ready(function () {
 
 // Add to local storage
 
+
+$(document).on("click", ".click-hook", function (event) {
+    event.preventDefault();
+    localStorage.setItem("ingredients", JSON.stringify($(this).attr("value")));
+
+});
+
+
+let favoriteList = [];
+let favoriteObject;
+
+
+
 $(document).on("click", ".fav", function (event) {
     event.preventDefault();
 
-    let favoriteList = JSON.parse(localStorage.getItem("favorites"));
+
+
+
+    // console.log(favoriteList);
 
     // Checkin if in local Storage
-    if (!Array.isArray(favoriteList)) {
-        favoriteList = [];
-    }
-    console.log("test")
+    // if (!Array.isArray(favoriteList)) {
+    //     favoriteList = [];
+    // }
+
     // Get the recipe details and store them in an object
-    let favoriteObject = $(this).attr("value");
-    console.log(favoriteObject)
+
+    favoriteObject = $(this).attr("value");
+    console.log(JSON.stringify(favoriteObject))
 
     // Adding favorite to local list variable and adding it to local storage
     favoriteList.push(JSON.stringify(favoriteObject));
-
     // Save the favorite into localstorage.
     localStorage.setItem("favorites", favoriteList);
 });
 
 //--------------------------------------On Click event for List on Index---------------------------------------------------------
-$(document).on("click", ".dishOnIndex", function (event) {
+$(document).on("click", ".click-hook", function (event) {
     event.preventDefault();
     let ingredients = [];
-    getIngredients;
 
 
+    function getIngredients(recipe) {
+
+        var recipeObject = localStorage.getItem("ingredients");
+        recipeObject = JSON.parse(recipeObject);
+        var recipeId = recipeObject.recipe_id;
+        console.log(recipeObject);
+        console.log(recipeId);
+
+        // var recipeid =;
+        var queryURL = "https://www.food2fork.com/api/get?key=YOUR_API_KEY&rId=" + recipeId;
+
+        $("#ingredients").empty();
+        console.log("Test")
+
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            // After data comes back from the request
+            .then(function (response) {
+                console.log(queryURL);
+                console.log(response);
+                // storing the data from the AJAX request in the results variable ONE OR THE OTHER OR BOTH OF THE TWO BELOW
+                var results = response.data;
+                console.log(results);
+                ingredients = recipe.ingredients;
+                console.log(ingredients);
+                var ingredientsList = $("<ul>");
+                //Loop through the ingredients returned from the call and append each one to ingredientsList
+                for (var i = 0; i < ingredients.length; i++) {
+                    var lI = $("<li>").text(ingredients[i]);
+                    ingredientsList.append(lI);
+                }
+                //Add ingredientsList unordered list to ingredients div
+                $("#ingredients").append(ingredientsList);
+
+            })
+
+    }
+
+    getIngredients();
 });
 
-function getIngredients(recipe) {
 
-    var recipeObject = localStorage.getItem("ingredients");
-    recipeObject = JSON.parse(recipeObject);
-
-    // var recipeid =;
-    var queryURL = `https://www.food2fork.com/api/get?key=YOUR_API_KEY&rId=${recipeObject.recipe_id}`;
-
-    $("#ingredients").empty();
-
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        // After data comes back from the request
-        .then(function (response) {
-            console.log(queryURL);
-            console.log(response);
-            // storing the data from the AJAX request in the results variable ONE OR THE OTHER OR BOTH OF THE TWO BELOW
-            var results = response.data;
-            console.log(results);
-            ingredients = recipe.ingredients;
-            console.log(ingredients);
-            var ingredientsList = $("<ul>");
-            //Loop through the ingredients returned from the call and append each one to ingredientsList
-            for (var i = 0; i < ingredients.length; i++) {
-                var lI = $("<li>").text(ingredients[i]);
-                ingredientsList.append(lI);
-            }
-            //Add ingredientsList unordered list to ingredients div
-            $("#ingredients").append(ingredientsList);
-
-        })
-
-}
 //Emily's original reused above
 
 // $(".fav").on("click", function (event) {
