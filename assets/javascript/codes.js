@@ -417,3 +417,9 @@ let ingredients1 = {
         "title": "Baked Pecorino Chicken"
     }
 }
+
+//API alternative maybe for later use
+  // let ip = $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
+    //     console.log(JSON.stringify(data, null, 2));
+    // });
+
