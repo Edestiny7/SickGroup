@@ -394,47 +394,35 @@ $(document).ready(function () {
 
 
 
-//----------------------------------Favoriting functionality---------------------------------
+// Add to local storage
+$("#fav").on("click", function (event) {
+    event.preventDefault();
 
-// Load the favorites from localstorage.
-// let list = JSON.parse(localStorage.getItem("favorites"));
+    let favoriteList = JSON.parse(localStorage.getItem("favorites"));
 
-// // Checkin if in local Storage
-// if (!Array.isArray(list)) {
-//     list = [];
-// }
+    // Checkin if in local Storage
+    if (!Array.isArray(favoriteList)) {
+        favoriteList = [];
+    }
 
-// // Add to local storage
-// $("#fav").on("click", function (event) {
-//     event.preventDefault();
+    // Get the recipe details and store them in an object
+    let favoriteObject = {
+        favoriteId: response1.recipes[4].recipe_id,
+        favoriteTitle: response1.recipes[4].title,
+        favoriteImage: response1.recipes[4].image_url,
+        favoritePublisher: response1.recipes[4].publisher,
+        favoriteF2fUrl: response1.recipes[4].f2f_url,
+        favoriteIngredients: response1.recipes[4].ingredients,
+        favoriteSourceUrl: response1.recipes[4].source_url,
+        favoriteSocialRank: response1.recipes[4].social_rank,
+        favoritePublisherUrl: response1.recipes[4].publisher_url
+    }
 
-//     // Get the recipe details and store them in variables
-//     let favorite_id = response1.recipes[4].recipe_id;
-//     let favorite_title = response1.recipes[4].title;
-//     let favorite_image = response1.recipes[4].image_url;
+    // Adding favorite to local list variable and adding it to local storage
+    favoriteList.push(favoriteObject);
 
-//     // Adding favorite to  local list variable and adding it to local storage
-//     list.push(
-//         favorite_id,
-//         favorite_title,
-//         favorite_image);
-
-//     // Save the favorite into localstorage.
-//     localStorage.setItem("favorites", JSON.stringify(list));
-//     list = [];
-// });
-
-// // render to favorite page is the goal
-// function renderFavorites(list) {
-
-//     // render favorites to page
-//     for (var i = 0; i < list.length; i++) {
-
-//         let favorite = $("<p>");
-//         favorite.text(list[i]);
-//         $("#favoriteRecipe").append(favorite);
-//     }
-// }
-
+    // Save the favorite into localstorage.
+    localStorage.setItem("favorites", JSON.stringify(favoriteList));
+});
 
 //Clickevent for Button

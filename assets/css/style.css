@@ -29,7 +29,6 @@ div.current-dish {
     padding: 25px;
 }
 
-
 .font {
     font-family: 'Special Elite', cursive;
     color: white;
@@ -37,6 +36,11 @@ div.current-dish {
 
 .fa_custom {
     color: darkred;
+}
+
+#favoriteRecipe {
+    font-family: 'Special Elite', cursive;
+    color: white
 }
 
 #chalkboard {
