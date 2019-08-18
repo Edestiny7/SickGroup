@@ -117,6 +117,7 @@ $(document).on("click", ".click-hook", function (event) {
     event.preventDefault();
     localStorage.setItem("ingredients", JSON.stringify($(this).attr("value")));
 
+    window.location.href = "./ingredients.html"
 });
 
 
@@ -127,9 +128,6 @@ let favoriteObject;
 
 $(document).on("click", ".fav", function (event) {
     event.preventDefault();
-
-
-
 
     // console.log(favoriteList);
 
