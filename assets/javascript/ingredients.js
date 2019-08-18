@@ -1,7 +1,9 @@
 $(document).ready(function () {
     $("body").css({
-        // background: "url('assets/images/ingredientsbackground.jpg') no-repeat center center fixed"
+        background: "darkred"
     });
+
+
     let dishImage = $("<img>")
         .attr("src", localStorage.getItem("current-dish-img"))
         .css("max-width", "80%")
