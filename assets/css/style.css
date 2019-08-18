@@ -6,9 +6,16 @@ body {
     /* Full width */
     width: 100%;
     /* Background image */
-    background: url("../images/background.jpg") no-repeat center center fixed;
     /* Center and scale the image nicely */
     background-size: cover;
+}
+
+div.row {
+    height: 100%;
+}
+
+div.right {
+    background: url("../images/slate.jpg");
 }
 
 div.jumbotron {
@@ -43,9 +50,21 @@ div.current-dish {
     color: white
 }
 
-#chalkboard {
+.chalkboard {
     font-family: 'Fredericka the Great', cursive;
     color: white;
+    text-align: center;
+    float: none;
+}
+
+.list {
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 1.3rem !important;
+}
+
+#img-div {
+    text-align: center
 }
 
 

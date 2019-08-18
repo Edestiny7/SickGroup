@@ -1,58 +1,55 @@
 $(document).ready(function () {
     $("body").css({
-        background: "url('assets/images/ingredientsbackground.jpg') no-repeat center center fixed"
+        // background: "url('assets/images/ingredientsbackground.jpg') no-repeat center center fixed"
     });
+    let dishImage = $("<img>")
+        .attr("src", localStorage.getItem("current-dish-img"))
+        .css("max-width", "80%")
+        .css("margin", "10px");
 
+    $("#img-div").append(dishImage)
 
+    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
+
+    //Get recipe Id from local storage
+    var recipeID = localStorage.getItem("ingredients");
+    console.log(recipeID);
 
     function getIngredients() {
 
-        var recipeObject = localStorage.getItem("ingredients");
-        console.log(recipeObject);
-        recipeObject = JSON.parse(recipeObject);
-        recipeObject = JSON.parse(recipeObject);
-        var recipeId = recipeObject.recipe_id;
-        console.log(recipeObject);
-        console.log(recipeId);
-        recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
-
-        // var recipeid =;
-        var queryURL = "https://www.food2fork.com/api/get?rId=" + recipeId + "&key=" + recipeKey;
-
-        $("#ingredients").empty();
-        console.log("Test")
+        var queryURL = "https://www.food2fork.com/api/get?rId=" + recipeID + "&key=" + recipeKey;
 
         $.ajax({
                 url: queryURL,
                 method: "GET"
             })
-            // After data comes back from the request
             .then(function (response) {
-                console.log(queryURL);
-                let ingredients = JSON.parse(response);
 
-                console.log(ingredients1);
+                console.log(response);
+                let parsedResponseObject = ingredients1; //change response to ingredients1 to response only here to switch to dummy object
 
-                let ingredientsArray = ingredients1.recipe.ingredients;
+                let ingredientsArray = parsedResponseObject.recipe.ingredients;
                 console.log(ingredientsArray)
+
+                let directions = $("<p>").text(parsedResponseObject.recipe.source_url)
+                    .css("margin-top", "50px")
+                    .css("font-size", "1.5rem");
+
+                $("#instructions").append(directions);
+
 
                 // Loop through the ingredients returned from the call and append each one to ingredientsList
                 for (var i = 0; i < ingredientsArray.length; i++) {
 
-                    let listElement = $("<li>").text(ingredientsArray[i])
+                    let listElement = $("<li>")
 
-
+                    listElement
+                        .addClass("")
+                        .text(ingredientsArray[i]);
                     $(".list").append(listElement);
+                    listElement = 0;
                 }
-                console.log(ingredientsList);
-                //Add ingredientsList unordered list to ingredients div
-                $("#ingredients").append(ingredientsList);
-
-                // window.location.href = "./ingredients.html"
-                // console.log("test");
-
             })
-
     }
 
     getIngredients();
