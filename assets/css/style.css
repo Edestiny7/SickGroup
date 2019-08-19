@@ -12,7 +12,7 @@ body {
     background-size: cover;
 }
 
-.right {
+div.right {
     background: url("../images/slate.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -40,9 +40,26 @@ div.current-dish {
     padding: 25px;
 }
 
+.clear {
+    background-color: black;
+}
+
 .font {
     font-family: 'Special Elite', cursive;
     color: white;
+}
+
+.newFav {
+    width: 100%;
+    float: left;
+    background-color: black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.button-div {
+    background-color: none;
+    padding: 10px;
 }
 
 .left {
