@@ -28,7 +28,7 @@ $(document).ready(function () {
             .then(function (response) {
 
                 console.log(response);
-                let parsedResponseObject = ingredients1; //change response to ingredients1 to response only here to switch to dummy object
+                let parsedResponseObject = response; //change response to ingredients1 to response only here to switch to dummy object
 
                 let ingredientsArray = parsedResponseObject.recipe.ingredients;
                 console.log(ingredientsArray)
@@ -42,7 +42,7 @@ $(document).ready(function () {
                 $("#instructions").append(directions);
 
                 $(document).on("click", ".instructions-link", function () {
-                    window.location.href = parsedResponseObject.recipe.source_url;
+                    window.open(parsedResponseObject.recipe.source_url);
                 })
 
 
@@ -61,5 +61,9 @@ $(document).ready(function () {
     }
 
     getIngredients();
+
+    $(".back").on("click", function () {
+        window.location.href = "index.html";
+    });
 
 });
