@@ -33,11 +33,17 @@ $(document).ready(function () {
                 let ingredientsArray = parsedResponseObject.recipe.ingredients;
                 console.log(ingredientsArray)
 
-                let directions = $("<p>").text(parsedResponseObject.recipe.source_url)
+                let directions = $("<p>").text("Click here to see the instuctions")
+                    .addClass("instructions-link")
                     .css("margin-top", "50px")
                     .css("font-size", "1.5rem");
 
+
                 $("#instructions").append(directions);
+
+                $(document).on("click", ".instructions-link", function () {
+                    window.location.href = parsedResponseObject.recipe.source_url;
+                })
 
 
                 // Loop through the ingredients returned from the call and append each one to ingredientsList

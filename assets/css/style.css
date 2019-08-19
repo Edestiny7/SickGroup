@@ -1,21 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
 
+html,
 body {
     /* Full height */
     height: 100%;
     /* Full width */
     width: 100%;
     /* Background image */
+    background: url("../images/background.jpg") no-repeat center center fixed;
     /* Center and scale the image nicely */
     background-size: cover;
 }
 
-div.row {
-    height: 100%;
+.right {
+    background: url("../images/slate.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-div.right {
-    background: url("../images/slate.jpg");
+div.row {
+    height: 100%
 }
 
 div.jumbotron {
@@ -39,6 +43,10 @@ div.current-dish {
 .font {
     font-family: 'Special Elite', cursive;
     color: white;
+}
+
+.left {
+    background-color: darkred;
 }
 
 .fa_custom {

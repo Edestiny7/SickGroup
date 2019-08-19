@@ -30,7 +30,8 @@ $(document).ready(function () {
                     .addClass("fav")
                     .attr("value", JSON.stringify(apiRecipes[i]))
                     .attr("data-recipe-index", i)
-                    .addClass("fa fa-^rt fa_custom");
+                    .addClass("fa fa-heart fa_custom")
+                    .css("margin-right", "15px")
 
                 let titleImg = $("<img>")
                     .addClass("click-hook")
@@ -42,7 +43,7 @@ $(document).ready(function () {
                     .attr("value", apiRecipes[i].recipe_id)
                     .attr("src", apiRecipes[i].image_url)
                     .text(apiRecipes[i].title)
-                    .addClass("font click-hook")
+                    .addClass("font")
                     .css("text-align", "center")
                     .prepend(favIcon);
 
@@ -118,21 +119,34 @@ $(document).ready(function () {
 
         let favoriteList = JSON.parse(localStorage.getItem("favorites"));
 
+
         // Checkin if in local Storage
-        if (!Array.isArray(favoriteList)) {
-            favoriteList = [];
+        if (!Array.isArray(favoriteList) || favoriteList == undefined) {
+            favoriteList = [{
+                recipe_id: 0
+            }];
+            console.log("here")
         }
+
+        console.log(favoriteList)
+
 
         // Get the recipe details and store them in an object
         let recipeIndex = $(this).attr("data-recipe-index");
 
         let favoriteItem = apiRecipes[parseInt(recipeIndex)];
 
-        // Adding favorite to local list variable and adding it to local storage
-        favoriteList.push(favoriteItem);
+        console.log(favoriteItem);
 
-        // Save the favorite into localstorage.
-        localStorage.setItem("favorites", JSON.stringify(favoriteList));
+        if (favoriteList.includes(favoriteItem)) {
+            console.log("already there");
+        } else {
+            // Adding favorite to local list variable and adding it to local storage
+            favoriteList.push(favoriteItem);
+
+            // Save the favorite into localstorage.
+            localStorage.setItem("favorites", JSON.stringify(favoriteList));
+        }
     });
 
     $(document).on("click", ".click-hook", function (event) {
