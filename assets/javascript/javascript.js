@@ -117,35 +117,39 @@ $(document).ready(function () {
     $(document).on("click", ".fav", function (event) {
         event.preventDefault();
 
+        let recipeIndex = $(this).attr("data-recipe-index");
         let favoriteList = JSON.parse(localStorage.getItem("favorites"));
-
+        let favoriteItem = apiRecipes[parseInt(recipeIndex)];
 
         // Checkin if in local Storage
         if (!Array.isArray(favoriteList) || favoriteList == undefined) {
-            favoriteList = [{
-                recipe_id: 0
-            }];
-            console.log("here")
-        }
-
-        console.log(favoriteList)
-
-
-        // Get the recipe details and store them in an object
-        let recipeIndex = $(this).attr("data-recipe-index");
-
-        let favoriteItem = apiRecipes[parseInt(recipeIndex)];
-
-        console.log(favoriteItem);
-
-        if (favoriteList.includes(favoriteItem)) {
-            console.log("already there");
-        } else {
-            // Adding favorite to local list variable and adding it to local storage
+            favoriteList = [];
+            console.log("no favs yet")
             favoriteList.push(favoriteItem);
-
-            // Save the favorite into localstorage.
             localStorage.setItem("favorites", JSON.stringify(favoriteList));
+
+        } else {
+            let checkArray = [];
+            let checkID;
+            // console.log(recipeIndex);
+            console.log(favoriteList)
+            console.log(favoriteItem.recipe_id)
+
+            for (i = 0; i < favoriteList.length; i++) {
+                checkID = favoriteList[i].recipe_id;
+                console.log(checkID);
+                checkArray.push(checkID);
+
+                console.log(checkArray);
+            }
+
+            if (checkArray.includes(favoriteItem.recipe_id)) {
+                console.log("Already there")
+            } else {
+                console.log("not there")
+                favoriteList.push(favoriteItem);
+                localStorage.setItem("favorites", JSON.stringify(favoriteList));
+            }
         }
     });
 
