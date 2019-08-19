@@ -11,25 +11,28 @@ $(document).ready(function () {
 
     $("#img-div").append(dishImage)
 
-    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
+    let recipeKey = "69cfc8b380c2e920a7f5e117b2b5bd19";
 
     //Get recipe Id from local storage
     var recipeID = localStorage.getItem("ingredients");
     console.log(recipeID);
+    console.log(typeof recipeID);
 
     function getIngredients() {
 
         var queryURL = "https://www.food2fork.com/api/get?rId=" + recipeID + "&key=" + recipeKey;
 
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
+            url: queryURL,
+            method: "GET"
+        })
             .then(function (response) {
 
                 console.log(response);
                 let parsedResponseObject = response; //change response to ingredients1 to response only here to switch to dummy object
-
+                parsedResponseObject = JSON.parse(response);
+                // parsedResponseObject = JSON.parse(parsedResponseObject);
+                console.log(parsedResponseObject);
                 let ingredientsArray = parsedResponseObject.recipe.ingredients;
                 console.log(ingredientsArray)
 
@@ -40,6 +43,11 @@ $(document).ready(function () {
 
 
                 $("#instructions").append(directions);
+
+                let recipeName = $("<div>").text(parsedResponseObject.recipe.title).css("margin-top", "10px").addClass("d - flex justify - content - center");
+
+                $("#recipeName").append(recipeName);
+
 
                 $(document).on("click", ".instructions-link", function () {
                     window.open(parsedResponseObject.recipe.source_url);
