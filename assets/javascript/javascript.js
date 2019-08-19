@@ -2,7 +2,7 @@
 $(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "69d0e213894baf3dbaef4e09fa5215d8";
+    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
     let locationKey;
     let recipe;
     let location;
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
             response = JSON.parse(response);
 
-            apiRecipes = response1.recipes; //change response1 to response only here to switch to dummy object
+            apiRecipes = response.recipes; //change response1 to response only here to switch to dummy object
             console.log(apiRecipes);
 
             // response1 = JSON.parse(response1);
@@ -160,5 +160,10 @@ $(document).ready(function () {
 
         window.location.href = "./ingredients.html"
     });
+
+    $(".back").on("click", function () {
+        window.location.href = "index.html";
+    });
+
 
 });
