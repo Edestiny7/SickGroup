@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
 
+html,
 body {
     /* Full height */
     height: 100%;
@@ -9,6 +10,16 @@ body {
     background: url("../images/background.jpg") no-repeat center center fixed;
     /* Center and scale the image nicely */
     background-size: cover;
+}
+
+div.right {
+    background: url("../images/slate.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div.row {
+    height: 100%
 }
 
 div.jumbotron {
@@ -29,9 +40,30 @@ div.current-dish {
     padding: 25px;
 }
 
+.clear {
+    background-color: black;
+}
+
 .font {
     font-family: 'Special Elite', cursive;
     color: white;
+}
+
+.newFav {
+    width: 100%;
+    float: left;
+    background-color: black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.button-div {
+    background-color: none;
+    padding: 10px;
+}
+
+.left {
+    background-color: darkred;
 }
 
 .fa_custom {
@@ -43,9 +75,21 @@ div.current-dish {
     color: white
 }
 
-#chalkboard {
+.chalkboard {
     font-family: 'Fredericka the Great', cursive;
     color: white;
+    text-align: center;
+    float: none;
+}
+
+.list {
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 1.3rem !important;
+}
+
+#img-div {
+    text-align: center
 }
 
 

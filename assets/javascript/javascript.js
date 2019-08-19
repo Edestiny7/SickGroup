@@ -1,8 +1,8 @@
 //AJAX call to recipe API
-$(document).ready(function() {
+$(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "69d0e213894baf3dbaef4e09fa5215d8";
+    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
     let locationKey;
     let recipe;
     let location;
@@ -13,55 +13,46 @@ $(document).ready(function() {
         $.ajax({
             url: searchTerm,
             method: "GET",
-        }).then(function(response) {
+        }).then(function (response) {
 
             console.log(response);
             $(".search-form").hide();
             $("#current-dish").empty();
 
-            // let random = Math.floor(Math.random() * 30);
             response = JSON.parse(response);
 
-            apiRecipes = response1.recipes;
+            apiRecipes = response.recipes; //change response1 to response only here to switch to dummy object
             console.log(apiRecipes);
 
             // response1 = JSON.parse(response1);
-            for (i = 0; i < response1.recipes.length; i++) {
-                console.log(2);
-                console.log("Recipes API List addition")
+            for (i = 0; i < apiRecipes.length; i++) {
                 let favIcon = $("<i>")
                     .addClass("fav")
-                    .attr("value", JSON.stringify(response1.recipes[2]))
+                    .attr("value", JSON.stringify(apiRecipes[i]))
                     .attr("data-recipe-index", i)
-                    .addClass("fa fa-heart fa_custom");
+                    .addClass("fa fa-heart fa_custom")
+                    .css("margin-right", "15px")
 
                 let titleImg = $("<img>")
-                    .attr("src", response1.recipes[i].image_url)
-                    .css("max-width", "500px");
+                    .addClass("click-hook")
+                    .attr("src", apiRecipes[i].image_url)
+                    .attr("value", apiRecipes[i].recipe_id)
+                    .css("max-width", "500px")
 
                 let dishTitle = $("<h5>")
-                    .text(response1.recipes[i].title)
+                    .attr("value", apiRecipes[i].recipe_id)
+                    .attr("src", apiRecipes[i].image_url)
+                    .text(apiRecipes[i].title)
                     .addClass("font")
                     .css("text-align", "center")
                     .prepend(favIcon);
 
-                /*  let titleImg = $("<img>")
-                      .attr("src", response1.recipes[i].image_url)
-                      .css("max-width", "500px")
-                      .add(favIcon);
-
-                  let dishTitle = $("<h5>")
-                      .text(response1.recipes[i].title)
-                      .addClass("font")
-                      .css("text-align", "center")
-                      .prepend(favIcon);*/
-
                 let newListDiv = $("<div>")
-                    .addClass("jumbotron justify-content-center click-hook")
+                    .addClass("jumbotron justify-content-center")
                     .css("width", "fit-content")
                     .css("margin", "10px auto")
                     .append(dishTitle)
-                    .append(titleImg)
+                    .append(titleImg);
 
                 $("#current-dish").append(newListDiv);
             }
@@ -72,7 +63,7 @@ $(document).ready(function() {
 
     var ip = "";
     var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    $(function() {
+    $(function () {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
@@ -80,7 +71,7 @@ $(document).ready(function() {
                 apiKey: api_key,
                 ipAddress: ip
             },
-            success: function(data) {
+            success: function (data) {
                 $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
 
                 let countryCode = data.location.country;
@@ -112,37 +103,67 @@ $(document).ready(function() {
 
     //-------------------------------------Search function--------------------------------------
 
-    $("#search-btn").on("click", function() {
+    $("#search-btn").on("click", function () {
         $(".search-form").toggle() //showing search form
     });
 
-    $("#search-btn2").on("click", function() {
+    $("#search-btn2").on("click", function () {
 
         let searchTerm = $("#search-input").val();
         let apiInput = `https://www.food2fork.com/api/search?key=${recipeKey}&q=${searchTerm}`;
         recipeCall(apiInput);
     });
 
-    $(document).on("click", ".fav", function(event) {
+    $(document).on("click", ".fav", function (event) {
         event.preventDefault();
 
-        let favoriteList = JSON.parse(localStorage.getItem("favorites"));
-
-        // Checkin if in local Storage
-        if (!Array.isArray(favoriteList)) {
-            favoriteList = [];
-        }
-
-        // Get the recipe details and store them in an object
         let recipeIndex = $(this).attr("data-recipe-index");
-
+        let favoriteList = JSON.parse(localStorage.getItem("favorites"));
         let favoriteItem = apiRecipes[parseInt(recipeIndex)];
 
-        // Adding favorite to local list variable and adding it to local storage
-        favoriteList.push(favoriteItem);
+        // Checkin if in local Storage
+        if (!Array.isArray(favoriteList) || favoriteList == undefined) {
+            favoriteList = [];
+            console.log("no favs yet")
+            favoriteList.push(favoriteItem);
+            localStorage.setItem("favorites", JSON.stringify(favoriteList));
 
-        // Save the favorite into localstorage.
-        localStorage.setItem("favorites", JSON.stringify(favoriteList));
+        } else {
+            let checkArray = [];
+            let checkID;
+            // console.log(recipeIndex);
+            console.log(favoriteList)
+            console.log(favoriteItem.recipe_id)
+
+            for (i = 0; i < favoriteList.length; i++) {
+                checkID = favoriteList[i].recipe_id;
+                console.log(checkID);
+                checkArray.push(checkID);
+
+                console.log(checkArray);
+            }
+
+            if (checkArray.includes(favoriteItem.recipe_id)) {
+                console.log("Already there")
+            } else {
+                console.log("not there")
+                favoriteList.push(favoriteItem);
+                localStorage.setItem("favorites", JSON.stringify(favoriteList));
+            }
+        }
     });
+
+    $(document).on("click", ".click-hook", function (event) {
+        event.preventDefault();
+        localStorage.setItem("ingredients", $(this).attr("value"));
+        localStorage.setItem("current-dish-img", $(this).attr("src"));
+
+        window.location.href = "./ingredients.html"
+    });
+
+    $(".back").on("click", function () {
+        window.location.href = "index.html";
+    });
+
 
 });
