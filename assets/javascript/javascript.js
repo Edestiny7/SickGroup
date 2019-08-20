@@ -1,8 +1,8 @@
 //AJAX call to recipe API
-$(document).ready(function () {
+$(document).ready(function() {
     // Call recipe API
 
-    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
+    let recipeKey = "c9ae7f2ea0ea9d5aab1fec2f528198a8";
     let locationKey;
     let recipe;
     let location;
@@ -13,7 +13,7 @@ $(document).ready(function () {
         $.ajax({
             url: searchTerm,
             method: "GET",
-        }).then(function (response) {
+        }).then(function(response) {
 
             console.log(response);
             $(".search-form").hide();
@@ -62,8 +62,8 @@ $(document).ready(function () {
     // Call Location API on load
 
     var ip = "";
-    var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
-    $(function () {
+    var api_key = 'at_q44cgU9mnnwr3vkkG8p9tsuxOhYyt';
+    $(function() {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 apiKey: api_key,
                 ipAddress: ip
             },
-            success: function (data) {
+            success: function(data) {
                 $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
 
                 let countryCode = data.location.country;
@@ -103,18 +103,18 @@ $(document).ready(function () {
 
     //-------------------------------------Search function--------------------------------------
 
-    $("#search-btn").on("click", function () {
+    $("#search-btn").on("click", function() {
         $(".search-form").toggle() //showing search form
     });
 
-    $("#search-btn2").on("click", function () {
+    $("#search-btn2").on("click", function() {
 
         let searchTerm = $("#search-input").val();
         let apiInput = `https://www.food2fork.com/api/search?key=${recipeKey}&q=${searchTerm}`;
         recipeCall(apiInput);
     });
 
-    $(document).on("click", ".fav", function (event) {
+    $(document).on("click", ".fav", function(event) {
         event.preventDefault();
 
         let recipeIndex = $(this).attr("data-recipe-index");
@@ -153,7 +153,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", ".click-hook", function (event) {
+    $(document).on("click", ".click-hook", function(event) {
         event.preventDefault();
         localStorage.setItem("ingredients", $(this).attr("value"));
         localStorage.setItem("current-dish-img", $(this).attr("src"));
@@ -161,7 +161,7 @@ $(document).ready(function () {
         window.location.href = "./ingredients.html"
     });
 
-    $(".back").on("click", function () {
+    $(".back").on("click", function() {
         window.location.href = "index.html";
     });
 
