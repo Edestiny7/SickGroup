@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     $("#img-div").append(dishImage)
 
-    let recipeKey = "69cfc8b380c2e920a7f5e117b2b5bd19";
+    let recipeKey = "b4324d0c2d00e506749771a9d6ff26d4";
 
     //Get recipe Id from local storage
     var recipeID = localStorage.getItem("ingredients");
