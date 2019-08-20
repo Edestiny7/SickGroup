@@ -2,7 +2,7 @@
 $(document).ready(function () {
     // Call recipe API
 
-    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
+    let recipeKey = "69cfc8b380c2e920a7f5e117b2b5bd19";
     let locationKey;
     let recipe;
     let location;
@@ -62,7 +62,7 @@ $(document).ready(function () {
     // Call Location API on load
 
     var ip = "";
-    var api_key = 'at_Hh2TNGBjuJxpNv4hWz9Zug16R7wuL';
+    var api_key = 'at_BJyU2faso4KW1vJlJCgTWqJehiC4n';
     $(function () {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",

@@ -18,7 +18,13 @@ div.right {
     background-size: cover;
 }
 
-div.row {
+div.left {
+    background: url("../images/angryimg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div.row1 {
     height: 100%
 }
 
@@ -92,8 +98,14 @@ div.current-dish {
     text-align: center
 }
 
-
-/* .about {
-    background-size: cover;
-    height: 100vw;
-} */
+#recipeName {
+    background: rgb(22, 9, 9) !important;
+}
+/* Hover effects */
+.fa_custom:hover {
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+    transform: translate(1px, 5px);
+    cursor: pointer;
+    transition: box-shadow .1s, transform 1s;
+ }
+ 
