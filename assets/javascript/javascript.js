@@ -2,7 +2,11 @@
 $(document).ready(function() {
     // Call recipe API
 
+<<<<<<< HEAD
     let recipeKey = "c9ae7f2ea0ea9d5aab1fec2f528198a8";
+=======
+    let recipeKey = "69cfc8b380c2e920a7f5e117b2b5bd19";
+>>>>>>> ce2c261e0d42a3bd0d5e3797e4e02ff5d2eedf95
     let locationKey;
     let recipe;
     let location;
@@ -62,8 +66,13 @@ $(document).ready(function() {
     // Call Location API on load
 
     var ip = "";
+<<<<<<< HEAD
     var api_key = 'at_q44cgU9mnnwr3vkkG8p9tsuxOhYyt';
     $(function() {
+=======
+    var api_key = 'at_BJyU2faso4KW1vJlJCgTWqJehiC4n';
+    $(function () {
+>>>>>>> ce2c261e0d42a3bd0d5e3797e4e02ff5d2eedf95
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
