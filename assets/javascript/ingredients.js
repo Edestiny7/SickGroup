@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $("body").css({
         background: "darkred"
     });
@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     $("#img-div").append(dishImage)
 
-    let recipeKey = "c9ae7f2ea0ea9d5aab1fec2f528198a8";
+    let recipeKey = "1ea52a5202149f9ac4dc33174c85c140";
 
     //Get recipe Id from local storage
     var recipeID = localStorage.getItem("ingredients");
@@ -26,14 +26,10 @@ $(document).ready(function() {
                 url: queryURL,
                 method: "GET"
             })
-            .then(function(response) {
+            .then(function (response) {
 
                 console.log(response);
                 let parsedResponseObject = response; //change response to ingredients1 to response only here to switch to dummy object
-                parsedResponseObject = JSON.parse(response);
-
-                // parsedResponseObject = JSON.parse(parsedResponseObject);
-                console.log(parsedResponseObject);
 
                 let ingredientsArray = parsedResponseObject.recipe.ingredients;
                 console.log(ingredientsArray)
@@ -45,10 +41,8 @@ $(document).ready(function() {
 
 
                 $("#instructions").append(directions);
-                let recipeName = $("<div>").text(parsedResponseObject.recipe.title).css("margin-top", "10px").addClass("d - flex justify - content - center");​
-                $("#recipeName").append(recipeName);
 
-                $(document).on("click", ".instructions-link", function() {
+                $(document).on("click", ".instructions-link", function () {
                     window.open(parsedResponseObject.recipe.source_url);
                 })
 
@@ -69,7 +63,7 @@ $(document).ready(function() {
 
     getIngredients();
 
-    $(".back").on("click", function() {
+    $(".back").on("click", function () {
         window.location.href = "index.html";
     });
 
