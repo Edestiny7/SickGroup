@@ -1,5 +1,5 @@
 //AJAX call to recipe API
-$(document).ready(function () {
+$(document).ready(function() {
     // Call recipe API
 
     let recipeKey = "b4324d0c2d00e506749771a9d6ff26d4";
@@ -13,7 +13,7 @@ $(document).ready(function () {
         $.ajax({
             url: searchTerm,
             method: "GET",
-        }).then(function (response) {
+        }).then(function(response) {
 
             console.log(response);
             $(".search-form").hide();
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
     var ip = "";
     var api_key = 'at_BJyU2faso4KW1vJlJCgTWqJehiC4n';
-    $(function () {
+    $(function() {
         $.ajax({
             url: "https://geo.ipify.org/api/v1",
             dataType: "json",
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 apiKey: api_key,
                 ipAddress: ip
             },
-            success: function (data) {
+            success: function(data) {
                 $("body").append("<pre>" + JSON.stringify(data, "", 2) + "</pre>");
 
                 let countryCode = data.location.country;
@@ -103,18 +103,18 @@ $(document).ready(function () {
 
     //-------------------------------------Search function--------------------------------------
 
-    $("#search-btn").on("click", function () {
+    $("#search-btn").on("click", function() {
         $(".search-form").toggle() //showing search form
     });
 
-    $("#search-btn2").on("click", function () {
+    $("#search-btn2").on("click", function() {
 
         let searchTerm = $("#search-input").val();
         let apiInput = `https://www.food2fork.com/api/search?key=${recipeKey}&q=${searchTerm}`;
         recipeCall(apiInput);
     });
 
-    $(document).on("click", ".fav", function (event) {
+    $(document).on("click", ".fav", function(event) {
         event.preventDefault();
 
         let recipeIndex = $(this).attr("data-recipe-index");
@@ -153,7 +153,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", ".click-hook", function (event) {
+    $(document).on("click", ".click-hook", function(event) {
         event.preventDefault();
         localStorage.setItem("ingredients", $(this).attr("value"));
         localStorage.setItem("current-dish-img", $(this).attr("src"));
@@ -161,7 +161,7 @@ $(document).ready(function () {
         window.location.href = "./ingredients.html"
     });
 
-    $(".back").on("click", function () {
+    $(".back").on("click", function() {
         window.location.href = "index.html";
     });
 

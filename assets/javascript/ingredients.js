@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     $("body").css({
         background: "darkred"
     });
@@ -23,10 +23,10 @@ $(document).ready(function () {
         var queryURL = "https://www.food2fork.com/api/get?rId=" + recipeID + "&key=" + recipeKey;
 
         $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            .then(function (response) {
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
 
                 console.log(response);
                 let parsedResponseObject = response; //change response to ingredients1 to response only here to switch to dummy object
@@ -49,7 +49,7 @@ $(document).ready(function () {
                 $("#recipeName").append(recipeName);
 
 
-                $(document).on("click", ".instructions-link", function () {
+                $(document).on("click", ".instructions-link", function() {
                     window.open(parsedResponseObject.recipe.source_url);
                 })
 
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     getIngredients();
 
-    $(".back").on("click", function () {
+    $(".back").on("click", function() {
         window.location.href = "index.html";
     });
 
