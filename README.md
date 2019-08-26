@@ -1,3 +1,6 @@
+Link to deployment
+https://edestiny7.github.io/SickGroup/
+
 # SickGroup
 This is a front end recipe application built with Bootstrap & jQuery for dynamic responsiveness utilizing both geo location and recipe APIs.
 
